@@ -1,9 +1,10 @@
-﻿namespace Bangazon.Controllers
+﻿using Bangazon.Models;
+using System.Collections.Generic;
+
+namespace Bangazon.Models.ProductTypeViewModels
 {
-    internal class ProductTypesViewModel
+    public class ProductTypesViewModel
     {
-        public ProductTypesViewModel()
-        {
-        }
+        public IEnumerable<GroupedProducts> GroupedProducts { get; set; }
     }
 }
