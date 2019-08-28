@@ -34,11 +34,22 @@ namespace Bangazon.Controllers
                 var filteredProducts = products.Where(p => p.Title.Contains(searchString));
                 return View(await filteredProducts.ToListAsync());
             }
-            else  // List products
+            else // List products
             {           
             var applicationDbContext = _context.Product.Include(p => p.ProductType).Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
-            }
+            }                      
+        }
+        //this method gets and filters by product type id 
+        public async Task<IActionResult> ListProductByType(int id)
+        {
+            
+            var products = from p in _context.Product
+                           select p;
+
+            var filteredProducts = products.Where(p => p.ProductTypeId == id);
+            return View(await filteredProducts.ToListAsync());
+
         }
 
         // GET: Products/Details/5
