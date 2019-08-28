@@ -9,7 +9,7 @@
 @foreach (var item in Model.GroupedProducts)
 {
 <h3>
-    <a asp-controller="Products" asp-action="GetProductType" asp-route-id="">
+    <a asp-controller="Products" asp-action="Index" asp-route-id="">
         @item.TypeName
         (@item.ProductCount)
         </a>
