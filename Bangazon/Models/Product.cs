@@ -56,9 +56,10 @@ namespace Bangazon.Models
             Active = true;
         }
 
-        public void UpdateQuantity()
+        public int UpdateQuantity()
         {
             Quantity -= OrderProducts.Count;
+            return Quantity;
         }
     }
 }
