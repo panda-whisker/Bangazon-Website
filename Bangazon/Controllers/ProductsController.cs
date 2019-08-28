@@ -25,7 +25,27 @@ namespace Bangazon.Controllers
         {
             var applicationDbContext = _context.Product.Include(p => p.ProductType).Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
+
+
         }
+        public async Task<IActionResult> GetProductType(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productTypeId = await _context.Product
+                .Include(p => p.Title)
+                .Include(p => p.Quantity)
+                .Include(p => p.Price)
+                .FirstOrDefaultAsync(pt => pt.ProductTypeId == id);
+
+            return View(productTypeId);
+
+            
+        }
+
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
