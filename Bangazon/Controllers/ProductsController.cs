@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Bangazon.Data;
 using Bangazon.Models;
 using Bangazon.Models.ProductTypeViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bangazon.Controllers
 {
@@ -21,6 +22,7 @@ namespace Bangazon.Controllers
         }
 
         // GET: Products
+        [Authorize]
         public async Task<IActionResult> Index(string searchString)
         {
             //List product search results
