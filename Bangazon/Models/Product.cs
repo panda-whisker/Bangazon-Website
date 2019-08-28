@@ -52,10 +52,26 @@ namespace Bangazon.Models
 
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
 
+        [NotMapped]
+        public int CurrentQuantity
+        {
+            get
+            {
+                if( OrderProducts == null)
+                {
+                    return Quantity;
+                }
+                else
+                {
+                    return Quantity - OrderProducts.Count;
+                }
+            }
+        }
+
         public Product ()
         {
             Active = true;
         }
-
+       
     }
 }
