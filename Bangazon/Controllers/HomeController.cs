@@ -24,8 +24,6 @@ namespace Bangazon.Controllers
         public async Task<IActionResult> Index()
         {
             List<Product> products = await _context.Product
-                                     .Include(p => p.Title)
-                                     .Include(p => p.DateCreated)
                                      .Take(20)
                                      .ToListAsync();
             return View(products);
