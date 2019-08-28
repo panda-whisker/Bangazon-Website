@@ -1,7 +1,53 @@
-﻿@{
+﻿@model IEnumerable<Bangazon.Models.Product>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome Bangazon A Site To Buy And Sell Things</h1>
+    <h1 class="display-3">Welcome to Bangazon!</h1>
+    <br />
+    <br />
+    <h3>New Items!</h3>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductType.Label)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
