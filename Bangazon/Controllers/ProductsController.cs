@@ -29,7 +29,7 @@ namespace Bangazon.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 var products = from p in _context.Product
-                             select p;
+                               select p;
 
                 var filteredProducts = products.Where(p => p.Title.Contains(searchString));
                 return View(await filteredProducts.ToListAsync());
