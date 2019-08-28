@@ -22,10 +22,23 @@ namespace Bangazon.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        [Authorize]
+        public async Task<IActionResult> Index(string searchString)
         {
+            //List product search results
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var products = from p in _context.Product
+                               select p;
+
+                var filteredProducts = products.Where(p => p.Title.Contains(searchString));
+                return View(await filteredProducts.ToListAsync());
+            }
+            else  // List products
+            {           
             var applicationDbContext = _context.Product.Include(p => p.ProductType).Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
+            }
         }
 
         // GET: Products/Details/5
