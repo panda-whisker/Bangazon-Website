@@ -24,6 +24,8 @@ namespace Bangazon.Controllers
             _userManager = userManager;
         }
 
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         // GET: Products
         [Authorize]
         public async Task<IActionResult> Index(string searchString)
@@ -43,6 +45,34 @@ namespace Bangazon.Controllers
             return View(await applicationDbContext.ToListAsync());
             }                      
         }
+
+
+        public async Task<IActionResult> ProductsByCity(string searchByCity)
+        {
+            //List products by city search results
+            var products = from p in _context.Product
+                               select p;
+            if (!String.IsNullOrEmpty(searchByCity))
+            {
+                var filteredProducts = products.Where(p => p.City == searchByCity);
+                int filteredProductsCount = filteredProducts.Count();
+                if (filteredProductsCount > 0)
+                {
+                    return View(await filteredProducts.ToListAsync());
+                }
+                else
+                {
+                    
+                    return RedirectToAction("Index", "Home", new { noCityMessage = true });
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+
         //this method gets and filters by product type id 
         public async Task<IActionResult> ListProductByType(int id)
         {
@@ -77,6 +107,7 @@ namespace Bangazon.Controllers
         }
 
         // GET: Products/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
@@ -99,7 +130,7 @@ namespace Bangazon.Controllers
                 product.UserId = user.Id;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = product.ProductId });
             }
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", product.UserId);
