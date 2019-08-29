@@ -58,7 +58,7 @@ namespace Bangazon.Controllers
         public async Task<IActionResult> MyProducts()
         {
 
-           
+           // 1 get current logged in user 2) add back where clause
 
             var filteredProducts = _context.Product;
             return View(await filteredProducts.ToListAsync());
