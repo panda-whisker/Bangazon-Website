@@ -43,6 +43,33 @@ namespace Bangazon.Controllers
             return View(await applicationDbContext.ToListAsync());
             }                      
         }
+
+
+        public async Task<IActionResult> ProductsByCity(string searchByCity)
+        {
+            //List products by city search results
+            var products = from p in _context.Product
+                               select p;
+            if (!String.IsNullOrEmpty(searchByCity))
+            {
+                var filteredProducts = products.Where(p => p.City == searchByCity);
+                int filteredProductsCount = filteredProducts.Count();
+                if (filteredProductsCount > 0)
+                {
+                    return View(await filteredProducts.ToListAsync());
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+
         //this method gets and filters by product type id 
         public async Task<IActionResult> ListProductByType(int id)
         {
