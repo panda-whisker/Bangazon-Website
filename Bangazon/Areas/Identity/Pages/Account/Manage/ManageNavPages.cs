@@ -1,8 +1,10 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Bangazon.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize]
     public static class ManageNavPages
     {
         public static string Index => "Index";
@@ -15,7 +17,7 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
-        public static string PaymentType => "PaymentType";
+        public static string PaymentTypes => "PaymentTypes";
 
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
@@ -28,7 +30,7 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
 
-        public static string PaymentTypeNavClass(ViewContext viewContext) => PageNavClass(viewContext, PaymentType);
+        public static string PaymentTypesNavClass(ViewContext viewContext) => PageNavClass(viewContext, PaymentTypes);
 
         private static string PageNavClass(ViewContext viewContext, string page)
         {
