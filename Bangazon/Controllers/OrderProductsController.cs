@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bangazon.Data;
 using Bangazon.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bangazon.Controllers
 {
@@ -18,14 +19,14 @@ namespace Bangazon.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         // GET: OrderProducts
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.OrderProduct.Include(o => o.Order).Include(o => o.Product);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize]
         // GET: OrderProducts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,7 +46,7 @@ namespace Bangazon.Controllers
 
             return View(orderProduct);
         }
-
+        [Authorize]
         // GET: OrderProducts/Create
         public IActionResult Create()
         {
@@ -53,7 +54,7 @@ namespace Bangazon.Controllers
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Description");
             return View();
         }
-
+        [Authorize]
         // POST: OrderProducts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -71,7 +72,7 @@ namespace Bangazon.Controllers
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Description", orderProduct.ProductId);
             return View(orderProduct);
         }
-
+        [Authorize]
         // GET: OrderProducts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -89,7 +90,7 @@ namespace Bangazon.Controllers
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Description", orderProduct.ProductId);
             return View(orderProduct);
         }
-
+        [Authorize]
         // POST: OrderProducts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -126,7 +127,7 @@ namespace Bangazon.Controllers
             ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Description", orderProduct.ProductId);
             return View(orderProduct);
         }
-
+        [Authorize]
         // GET: OrderProducts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -146,7 +147,7 @@ namespace Bangazon.Controllers
 
             return View(orderProduct);
         }
-
+        [Authorize]
         // POST: OrderProducts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

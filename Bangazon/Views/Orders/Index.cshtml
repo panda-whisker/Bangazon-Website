@@ -48,6 +48,20 @@
                 <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
             </td>
         </tr>
+        @*@foreach(var opItem in item.OrderProducts)
+        {
+    <tr>
+        <td>
+            @opItem.Product.Title
+        </td>
+        <td>
+            @opItem.Product.Price
+        </td>
+        <td>
+            @opItem.Product.Quantity
+        </td>
+    </tr>*@
+        }
 }
     </tbody>
 </table>
