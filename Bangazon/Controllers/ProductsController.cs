@@ -56,8 +56,8 @@ namespace Bangazon.Controllers
             return View(await filteredProducts.ToListAsync());
 
         }
-        //method to get product list by userid
-        public async Task<IActionResult> MyProducts()
+        //method to get My products list by userid
+        public async Task<IActionResult> MyProducts(string Id)
         {
 
            // 1 get current logged in user 2) add back where clause
