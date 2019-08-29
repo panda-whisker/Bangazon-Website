@@ -228,19 +228,15 @@ namespace Bangazon.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id, Boolean fromMyProducts)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Product.FindAsync(id);
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();
-            if (fromMyProducts == true)
-            {
+            
                 return RedirectToAction("MyProducts", "Products");
-            }
-            else
-            {
-                return RedirectToAction(nameof(Index));
-            }
+            
+         
             
         }
 
