@@ -8,6 +8,11 @@
     <h1 class="display-3">Welcome to Bangazon!</h1>
 </div>
 
+@if (ViewBag.noCityMessage == true)
+{
+    <p>City not found...</p>
+}
+
 <form asp-controller="Products" asp-action="ProductsByCity" method="get">
     <div class="form-actions no-color">
         <p>

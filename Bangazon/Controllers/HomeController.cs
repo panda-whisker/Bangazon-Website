@@ -21,11 +21,13 @@ namespace Bangazon.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Boolean noCityMessage)
         {
             List<Product> products = await _context.Product
                                      .Take(20)
                                      .ToListAsync();
+
+            ViewData["noCityMessage"] = noCityMessage;
             return View(products);
         }
 

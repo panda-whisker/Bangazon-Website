@@ -6,9 +6,6 @@
 
 <h1>ProductsByCity</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -30,7 +27,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">
+                    @Html.DisplayFor(modelItem => item.Title)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
@@ -41,11 +39,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.City)
             </td>
-            <td>
-                @*<a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |*@
-                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> @*|*@
-                @*<a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>*@
-            </td>
+            @*<td>
+                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+            </td>*@
         </tr>
 }
     </tbody>

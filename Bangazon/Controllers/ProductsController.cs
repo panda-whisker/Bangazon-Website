@@ -60,7 +60,8 @@ namespace Bangazon.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    
+                    return RedirectToAction("Index", "Home", new { noCityMessage = true });
                 }
             }
             else
