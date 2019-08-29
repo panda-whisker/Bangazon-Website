@@ -85,13 +85,17 @@ namespace Bangazon.Controllers
 
         }
         //method to get My products list by userid
-        public async Task<IActionResult> MyProducts(string Id)
+        public async Task<IActionResult> MyProducts()
         {
 
-           // 1 get current logged in user 2) add back where clause
+            // 1 get current logged in user 2) add back where clause
 
-            var filteredProducts = _context.Product;
-            return View(await filteredProducts.ToListAsync());
+            var user = await GetUserAsync();
+            var userProducts = _context.Product
+                .Where(p => p.UserId == user.Id);
+                //.Include(b => b.ApplicationUser)
+                //.Include(b => b.Author);
+            return View(await userProducts.ToListAsync());
 
         }
         // GET: Products/Details/5
