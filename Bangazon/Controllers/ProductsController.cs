@@ -54,7 +54,16 @@ namespace Bangazon.Controllers
             return View(await filteredProducts.ToListAsync());
 
         }
+        //method to get product list by userid
+        public async Task<IActionResult> MyProducts()
+        {
 
+           
+
+            var filteredProducts = _context.Product;
+            return View(await filteredProducts.ToListAsync());
+
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
