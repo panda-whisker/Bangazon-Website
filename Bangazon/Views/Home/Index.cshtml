@@ -6,10 +6,21 @@
 
 <div class="text-center">
     <h1 class="display-3">Welcome to Bangazon!</h1>
+    @*<br />
     <br />
-    <br />
-    <h3>New Items!</h3>
+    <h3>New Items!</h3>*@
 </div>
+
+<form asp-controller="Products" asp-action="ProductByCity" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <input type="text" name="SearchString" placeholder="Filter Products By City" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" />
+        </p>
+    </div>
+</form>
+
+<h3>New Items!</h3>
 
 <table class="table">
     <thead>
