@@ -11,7 +11,7 @@
 <form asp-controller="Products" asp-action="ProductsByCity" method="get">
     <div class="form-actions no-color">
         <p>
-            <input type="text" name="SearchByCity" placeholder="Filter Products By City" value="@ViewData["CurrentFilter"]" />
+            <input pattern=".{1,}"   required title="1 characters minimum" type="text" name="SearchByCity" placeholder="Filter Products By City" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Search" class="btn btn-default" />
         </p>
     </div>
