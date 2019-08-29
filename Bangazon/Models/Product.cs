@@ -27,6 +27,7 @@ namespace Bangazon.Models
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:C}")]
+        [Range(0, 10000, ErrorMessage = "The price of {0} must be less than {2}.")]
         public double Price { get; set; }
 
         [Required]
