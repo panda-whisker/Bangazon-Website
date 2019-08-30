@@ -87,6 +87,7 @@ namespace Bangazon.Controllers
 
         }
         //method to get My products list by userid
+        [Authorize]
         public async Task<IActionResult> MyProducts()
         {
 
