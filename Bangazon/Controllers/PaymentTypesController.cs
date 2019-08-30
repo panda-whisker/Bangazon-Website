@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Bangazon.Data;
 using Bangazon.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bangazon.Controllers
 {
+    [Authorize]
     public class PaymentTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -108,10 +110,14 @@ namespace Bangazon.Controllers
                 return NotFound();
             }
 
+            ModelState.Remove("User");
+            ModelState.Remove("UserId");
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var user = await GetUserAsync();
+                    paymentType.UserId = user.Id;
                     _context.Update(paymentType);
                     await _context.SaveChangesAsync();
                 }
