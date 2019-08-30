@@ -84,7 +84,20 @@ namespace Bangazon.Controllers
             return View(await filteredProducts.ToListAsync());
 
         }
+        //method to get My products list by userid
+        public async Task<IActionResult> MyProducts()
+        {
 
+            // 1 get current logged in user 2) add back where clause
+
+            var user = await GetUserAsync();
+            var userProducts = _context.Product
+                .Where(p => p.UserId == user.Id);
+                //.Include(b => b.ApplicationUser)
+                //.Include(b => b.Author);
+            return View(await userProducts.ToListAsync());
+
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -220,7 +233,11 @@ namespace Bangazon.Controllers
             var product = await _context.Product.FindAsync(id);
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            
+                return RedirectToAction("MyProducts", "Products");
+            
+         
+            
         }
 
         public async Task<IActionResult> Types()
