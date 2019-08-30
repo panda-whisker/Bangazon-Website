@@ -36,7 +36,7 @@ namespace Bangazon.Controllers
                 var products = from p in _context.Product
                                select p;
 
-                var filteredProducts = products.Where(p => p.Title == searchString);
+                var filteredProducts = products.Where(p => p.Title.Contains(searchString));
 
                 return View(await filteredProducts.ToListAsync());
             }
