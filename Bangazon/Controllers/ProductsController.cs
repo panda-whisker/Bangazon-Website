@@ -36,7 +36,8 @@ namespace Bangazon.Controllers
                 var products = from p in _context.Product
                                select p;
 
-                var filteredProducts = products.Where(p => p.Title.Contains(searchString));
+                var filteredProducts = products.Where(p => p.Title == searchString);
+
                 return View(await filteredProducts.ToListAsync());
             }
             else // List products
@@ -47,17 +48,18 @@ namespace Bangazon.Controllers
         }
 
 
-        public async Task<IActionResult> ProductsByCity(string searchByCity)
+        public async Task<IActionResult> ProductsByCity(string city)
         {
             //List products by city search results
             var products = from p in _context.Product
                                select p;
-            if (!String.IsNullOrEmpty(searchByCity))
+            if (!String.IsNullOrEmpty(city))
             {
-                var filteredProducts = products.Where(p => p.City == searchByCity);
+                var filteredProducts = products.Where(p => p.City == city);
                 int filteredProductsCount = filteredProducts.Count();
                 if (filteredProductsCount > 0)
                 {
+                    ViewData["city"] = city;
                     return View(await filteredProducts.ToListAsync());
                 }
                 else
