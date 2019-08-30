@@ -4,16 +4,16 @@
     ViewData["Title"] = "Types";
 }
 
-<h1>Product Categories</h1>
+<h4>Product Categories</h4>
 
 @foreach (var item in Model.GroupedProducts)
 {
-<h3>
+<p>
     <a asp-controller="Products" asp-action="ListProductByType" asp-route-id="@item.TypeId">
         @item.TypeName
         (@item.ProductCount)
         </a>
-</h3>
+</p>
     <ul>
         @foreach (var p in item.Products)
         {
